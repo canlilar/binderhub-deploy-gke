@@ -57,10 +57,6 @@ To run a script, do the following:
 ./src/<script-name>.sh
 ```
 
-To build the BinderHub, you should run `setup.sh` first (to install the required command line tools), then `deploy.sh` (which will build the BinderHub).
-Once the BinderHub is deployed, you can run `logs.sh` and `info.sh` to get the JupyterHub logs and service IP addresses respectively.
-`teardown.sh` should _only_ be used to delete your BinderHub deployment.
-
 You need to create a file called `config.json` which has the format described in the code block below.
 Fill the quotation marks with your desired namespaces, etc.
 `config.json` is git-ignored so sensitive information, such as passwords and Service Accounts, cannot not be pushed to GitHub.
@@ -101,6 +97,10 @@ Fill the quotation marks with your desired namespaces, etc.
 You can copy [`template-config.json`](./template-config.json) should you require.
 
 **Please note that all entries in `template-config.json` must be surrounded by double quotation marks (`"`), with the exception of `node_count` or if the value is `null`.**
+
+To build the BinderHub, you should run `setup.sh` first (to install the required command line tools), then `deploy.sh` (which will build the BinderHub).
+Once the BinderHub is deployed, you can run `logs.sh` and `info.sh` to get the JupyterHub logs and service IP addresses respectively.
+`teardown.sh` should _only_ be used to delete your BinderHub deployment.
 
 ### :key: Create a Service Account key
 

@@ -63,10 +63,12 @@ Fill the quotation marks with your desired namespaces, etc. and be sure to delet
 
 - For a list of available data centre regions and zones, [see here](https://cloud.google.com/compute/docs/regions-zones).
   This should be something like `us-central1` for a region and `us-central1-a` for a zone.
+- Enable the [Google Kubernetes Engine API](https://console.cloud.google.com/flows/enableapi?apiid=artifactregistry.googleapis.com,container.googleapis.com&_ga=2.138389811.2048159139.1643037343-1135681951.1638371582)
 - For the "machine_type", a list of available Linux Virtual Machines, [see here](https://cloud.google.com/compute/docs/machine-types).
   This should be something like, for example `n1-standard-2`.
 - The versions of the BinderHub Helm Chart can be found [here](https://jupyterhub.github.io/helm-chart/#development-releases-binderhub) and are of the form `0.2.0-<commit-hash>`.
   It is advised to select the most recent version unless you specifically require an older one.
+  
   
  ### :key: Create a Service Account key
 
@@ -80,7 +82,7 @@ This script will access your Google Cloud account using a [Service Account key](
 5. Leave the "Key Type" as JSON.
 6. Click "Create" to create the key and save the key file to your system.
 
-You will provide the path to this file under `credentials_file` in `config.json` described above.
+You will provide the path to this file under `credentials_file` in `config.json` described above. The path needs to be relative (ie. /home/username/binderhub-deploy-gke/key.json).
 
 > :rotating_light: The service account key file provides access to your Google cloud project.
 > It should be treated like any other secret credential.

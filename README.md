@@ -58,15 +58,33 @@ To run a script, do the following:
 ```
 
 You need to create a file called `config.json` which has the format described in the code block below.
-Fill the quotation marks with your desired namespaces, etc.
+Fill the quotation marks with your desired namespaces, etc. and be sure to delete all the // green text you see before using it. 
 `config.json` is git-ignored so sensitive information, such as passwords and Service Accounts, cannot not be pushed to GitHub.
 
 - For a list of available data centre regions and zones, [see here](https://cloud.google.com/compute/docs/regions-zones).
   This should be something like `us-central1` for a region and `us-central1-a` for a zone.
-- For a list of available Linux Virtual Machines, [see here](https://cloud.google.com/compute/docs/machine-types).
+- For the "machine_type", a list of available Linux Virtual Machines, [see here](https://cloud.google.com/compute/docs/machine-types).
   This should be something like, for example `n1-standard-2`.
 - The versions of the BinderHub Helm Chart can be found [here](https://jupyterhub.github.io/helm-chart/#development-releases-binderhub) and are of the form `0.2.0-<commit-hash>`.
   It is advised to select the most recent version unless you specifically require an older one.
+  
+ ### :key: Create a Service Account key
+
+This script will access your Google Cloud account using a [Service Account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
+[Create one now](https://console.cloud.google.com/apis/credentials/serviceaccountkey) in the console using the following settings:
+
+1. Select the project you are going to use (in the blue bar along the top of the browser window).
+2. Under "Service account", select "New service account".
+3. Give it any name you like!
+4. For the Role, choose "Project -> Editor".
+5. Leave the "Key Type" as JSON.
+6. Click "Create" to create the key and save the key file to your system.
+
+You will provide the path to this file under `credentials_file` in `config.json` described above.
+
+> :rotating_light: The service account key file provides access to your Google cloud project.
+> It should be treated like any other secret credential.
+> Specifically, it should **never** be checked into source control. :rotating_light:
 
 ```json
 {
@@ -101,24 +119,6 @@ You can copy [`template-config.json`](./template-config.json) should you require
 To build the BinderHub, you should run `setup.sh` first (to install the required command line tools), then `deploy.sh` (which will build the BinderHub).
 Once the BinderHub is deployed, you can run `logs.sh` and `info.sh` to get the JupyterHub logs and service IP addresses respectively.
 `teardown.sh` should _only_ be used to delete your BinderHub deployment.
-
-### :key: Create a Service Account key
-
-This script will access your Google Cloud account using a [Service Account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
-[Create one now](https://console.cloud.google.com/apis/credentials/serviceaccountkey) in the console using the following settings:
-
-1. Select the project you are going to use (in the blue bar along the top of the browser window).
-2. Under "Service account", select "New service account".
-3. Give it any name you like!
-4. For the Role, choose "Project -> Editor".
-5. Leave the "Key Type" as JSON.
-6. Click "Create" to create the key and save the key file to your system.
-
-You will provide the path to this file under `credentials_file` in `config.json` described above.
-
-> :rotating_light: The service account key file provides access to your Google cloud project.
-> It should be treated like any other secret credential.
-> Specifically, it should **never** be checked into source control. :rotating_light:
 
 ### :vertical_traffic_light: `setup.sh`
 
